@@ -57,15 +57,18 @@ const Login = () => {
     <Box
       h="100vh"
       overflow="hidden"
+      overflowX="hidden"
       bg="linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 50%, #a5d6a7 100%)"
       backgroundSize="200% 200%"
       animation="gradient 15s ease infinite"
       display="flex"
       alignItems="center"
       justifyContent="center"
-      px={4}
+      px={{ base: 3, sm: 4 }}
       position="relative"
       data-test-id="login-page"
+      w="100%"
+      maxW="100vw"
       css={{
         '@keyframes gradient': {
           '0%': { backgroundPosition: '0% 50%' },
@@ -79,27 +82,36 @@ const Login = () => {
         position="absolute"
         top="5%"
         left="5%"
-        w="200px"
-        h="200px"
+        w={{ base: "150px", md: "200px" }}
+        h={{ base: "150px", md: "200px" }}
         bg="whiteAlpha.300"
         borderRadius="full"
         filter="blur(60px)"
         animation="pulse 6s ease-in-out infinite"
+        display={{ base: "none", sm: "block" }}
       />
       <Box
         position="absolute"
         bottom="5%"
         right="5%"
-        w="250px"
-        h="250px"
+        w={{ base: "180px", md: "250px" }}
+        h={{ base: "180px", md: "250px" }}
         bg="whiteAlpha.300"
         borderRadius="full"
         filter="blur(80px)"
         animation="pulse 8s ease-in-out infinite"
+        display={{ base: "none", sm: "block" }}
       />
 
-      <Container maxW="550px" position="relative" zIndex={1} px={{ base: 4, sm: 6 }}>
-        <VStack gap={{ base: 4, md: 6 }} className="fade-in">
+      <Container 
+        maxW="550px" 
+        position="relative" 
+        zIndex={1} 
+        px={{ base: 3, sm: 4, md: 6 }}
+        w="100%"
+        mx="auto"
+      >
+        <VStack gap={{ base: 4, md: 6 }} className="fade-in" w="100%">
           {/* Logo */}
           <VStack gap={2} className="slide-in">
             <Box
@@ -135,10 +147,11 @@ const Login = () => {
           {/* Card */}
           <Box
             bg="white"
-            p={{ base: 6, md: 8 }}
+            p={{ base: 5, md: 8 }}
             borderRadius="2xl"
             shadow="2xl"
             w="100%"
+            maxW="100%"
             data-test-id="login-form"
             className="fade-in"
             border="2px solid"
@@ -146,6 +159,7 @@ const Login = () => {
             backdropFilter="blur(20px)"
             transition="all 0.3s"
             _hover={{ shadow: '3xl', transform: 'translateY(-2px)' }}
+            overflow="hidden"
           >
             <VStack gap={{ base: 5, md: 6 }} align="stretch">
               <VStack gap={1}>
@@ -175,6 +189,8 @@ const Login = () => {
                     justify="center"
                     flexWrap={{ base: "wrap", sm: "nowrap" }}
                     w="100%"
+                    maxW="100%"
+                    overflow="hidden"
                   >
                     <Box
                       as="label"
@@ -245,7 +261,7 @@ const Login = () => {
                 <FieldLabel fontWeight="700" mb={3} fontSize={{ base: "xs", md: "sm" }} color="gray.700">
                   Mobile Number
                 </FieldLabel>
-                <HStack gap={0} align="stretch" w="100%" bg="white" borderRadius="lg" borderWidth="1px" borderColor="#E0E0E0" overflow="hidden">
+                <HStack gap={0} align="stretch" w="100%" maxW="100%" bg="white" borderRadius="lg" borderWidth="1px" borderColor="#E0E0E0" overflow="hidden">
                   <Box
                     display="flex"
                     alignItems="center"
@@ -327,34 +343,38 @@ const Login = () => {
           {/* Test Credentials - Compact */}
           <Box 
             bg="whiteAlpha.400" 
-            p={4} 
+            p={{ base: 3, md: 4 }} 
             borderRadius="xl" 
             w="100%"
+            maxW="100%"
             backdropFilter="blur(20px)"
             border="none"
             className="fade-in"
             shadow="md"
+            overflow="hidden"
           >
-            <Text color="#1b5e20" fontSize="sm" fontWeight="700" mb={2} textAlign="center">
+            <Text color="#1b5e20" fontSize={{ base: "xs", md: "sm" }} fontWeight="700" mb={2} textAlign="center">
               🧪 Test Accounts
             </Text>
-            <HStack justify="center" gap={4} flexWrap="wrap">
-              <HStack gap={2}>
-                <Box w="6px" h="6px" bg="#4caf50" borderRadius="full" />
-                <Text color="#2e7d32" fontSize="xs" fontWeight="600">
-                  Owner: <Text as="span" fontWeight="800">9876543210</Text>
-                </Text>
+            <VStack gap={2} align="stretch" w="100%">
+              <HStack justify="center" gap={2} flexWrap="wrap">
+                <HStack gap={2} flexShrink={0}>
+                  <Box w="6px" h="6px" bg="#4caf50" borderRadius="full" />
+                  <Text color="#2e7d32" fontSize="xs" fontWeight="600" whiteSpace="nowrap">
+                    Owner: <Text as="span" fontWeight="800">9876543210</Text>
+                  </Text>
+                </HStack>
+                <HStack gap={2} flexShrink={0}>
+                  <Box w="6px" h="6px" bg="#4caf50" borderRadius="full" />
+                  <Text color="#2e7d32" fontSize="xs" fontWeight="600" whiteSpace="nowrap">
+                    Seeker: <Text as="span" fontWeight="800">9876543211</Text>
+                  </Text>
+                </HStack>
               </HStack>
-              <HStack gap={2}>
-                <Box w="6px" h="6px" bg="#4caf50" borderRadius="full" />
-                <Text color="#2e7d32" fontSize="xs" fontWeight="600">
-                  Seeker: <Text as="span" fontWeight="800">9876543211</Text>
-                </Text>
-              </HStack>
-            </HStack>
-            <Text color="#66bb6a" fontSize="xs" fontWeight="500" textAlign="center" mt={2}>
-              OTP: Any 6 digits (e.g. 123456)
-            </Text>
+              <Text color="#66bb6a" fontSize="xs" fontWeight="500" textAlign="center" mt={1}>
+                OTP: Any 6 digits (e.g. 123456)
+              </Text>
+            </VStack>
           </Box>
         </VStack>
       </Container>
