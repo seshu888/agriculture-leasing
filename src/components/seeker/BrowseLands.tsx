@@ -31,7 +31,7 @@ const BrowseLands = () => {
   const filteredLands = lands.filter((land: Land) => {
     const matchesSearch =
       land.title.toLowerCase().includes(search.toLowerCase()) ||
-      `${land.location.village}, ${land.location.district}, ${land.location.state}`.toLowerCase().includes(search.toLowerCase());
+      `${land.location.village}, ${land.location.district}`.toLowerCase().includes(search.toLowerCase());
     const matchesCrop = cropFilter ? land.crops.includes(cropFilter) : true;
     const matchesPrice = priceFilter
       ? priceFilter === 'low' ? land.pricePerAcre < 5000
@@ -50,7 +50,13 @@ const BrowseLands = () => {
   };
 
   return (
-    <Box bg="gray.50" minH="calc(100vh - 64px)" py={10} px={{ base: 4, md: 6, lg: 8 }} data-test-id="browse-lands-page">
+    <Box 
+      bg="linear-gradient(to bottom, #fafafa 0%, #f5f5f5 100%)" 
+      minH="calc(100vh - 64px)" 
+      py={10} 
+      px={{ base: 4, md: 6, lg: 8 }} 
+      data-test-id="browse-lands-page"
+    >
       <Container maxW="container.xl" mx="auto">
         <VStack align="start" gap={6} maxW="1400px" mx="auto">
           {/* Header */}
@@ -69,7 +75,15 @@ const BrowseLands = () => {
           </Box>
 
           {/* Search and Filters */}
-          <CardRoot w="100%" className="fade-in" border="1px solid" borderColor="gray.100">
+          <CardRoot 
+            w="100%" 
+            className="fade-in" 
+            border="1px solid" 
+            borderColor="gray.200"
+            shadow="0 8px 25px rgba(0, 0, 0, 0.08)"
+            bg="white"
+            borderRadius="2xl"
+          >
             <CardBody p={{ base: 4, md: 6 }}>
               <VStack gap={{ base: 3, md: 4 }} align="stretch">
                 {/* Search Bar */}

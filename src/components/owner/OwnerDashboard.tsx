@@ -86,7 +86,13 @@ const OwnerDashboard = () => {
   ];
 
   return (
-    <Box bg="gray.50" minH="calc(100vh - 64px)" py={10} px={{ base: 4, md: 6, lg: 8 }} data-test-id="owner-dashboard">
+    <Box 
+      bg="linear-gradient(to bottom, #fafafa 0%, #f5f5f5 100%)" 
+      minH="calc(100vh - 64px)" 
+      py={10} 
+      px={{ base: 4, md: 6, lg: 8 }} 
+      data-test-id="owner-dashboard"
+    >
       <Container maxW="container.xl" mx="auto">
         <VStack gap={10} align="stretch" maxW="1400px" mx="auto">
 
@@ -112,18 +118,32 @@ const OwnerDashboard = () => {
               <CardRoot 
                 key={i} 
                 data-test-id={`stat-card-${i}`}
-                className="fade-in"
+                className="fade-in card-hover"
                 style={{ animationDelay: `${i * 0.1}s` }}
-                transition="all 0.3s"
+                transition="all 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
                 cursor="pointer"
                 onClick={() => navigate(stat.path)}
-                _hover={{ transform: 'translateY(-6px)', shadow: 'xl' }}
+                _hover={{ 
+                  transform: 'translateY(-8px) scale(1.02)',
+                  shadow: '0 20px 40px rgba(0, 0, 0, 0.12)'
+                }}
                 border="1px solid"
                 borderColor="gray.200"
-                shadow="lg"
+                shadow="0 10px 30px rgba(0, 0, 0, 0.08)"
                 borderRadius="2xl"
                 overflow="hidden"
+                bg="white"
+                position="relative"
               >
+                {/* Gradient accent */}
+                <Box
+                  position="absolute"
+                  top={0}
+                  left={0}
+                  right={0}
+                  h="4px"
+                  bg={stat.bgGradient}
+                />
                 <CardBody p={{ base: 6, md: 8 }}>
                   <StatRoot>
                     <HStack justify="space-between" mb={4}>
@@ -131,7 +151,9 @@ const OwnerDashboard = () => {
                         p={{ base: 3, md: 4 }}
                         borderRadius="xl"
                         bg={stat.bgGradient}
-                        shadow="md"
+                        shadow="0 4px 12px rgba(0, 0, 0, 0.1)"
+                        transition="all 0.3s"
+                        _hover={{ transform: 'scale(1.1) rotate(5deg)' }}
                       >
                         <Icon as={stat.icon} boxSize={{ base: 6, md: 7 }} color={`${stat.color}.600`} />
                       </Box>
@@ -174,20 +196,21 @@ const OwnerDashboard = () => {
                   key={i}
                   cursor="pointer"
                   onClick={() => navigate(action.path)}
-                  transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+                  transition="all 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
                   _hover={{ 
-                    shadow: '2xl', 
-                    transform: 'translateY(-8px)',
+                    shadow: '0 20px 50px rgba(0, 0, 0, 0.15)',
+                    transform: 'translateY(-10px) scale(1.03)',
                   }}
                   data-test-id={`action-card-${i}`}
                   border="1px solid"
                   borderColor="gray.200"
-                  className="fade-in"
+                  className="fade-in card-hover"
                   style={{ animationDelay: `${(i + 3) * 0.1}s` }}
                   position="relative"
                   overflow="hidden"
                   borderRadius="2xl"
-                  shadow="lg"
+                  shadow="0 10px 30px rgba(0, 0, 0, 0.08)"
+                  bg="white"
                 >
                   {/* Gradient overlay */}
                   <Box
@@ -204,8 +227,9 @@ const OwnerDashboard = () => {
                         p={4}
                         borderRadius="xl"
                         bg={`${action.scheme}.50`}
-                        transition="all 0.3s"
-                        shadow="md"
+                        transition="all 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
+                        shadow="0 4px 12px rgba(0, 0, 0, 0.1)"
+                        _hover={{ transform: 'scale(1.15) rotate(10deg)' }}
                       >
                         <Icon as={action.icon} boxSize={9} color={`${action.scheme}.600`} />
                       </Box>
@@ -223,17 +247,18 @@ const OwnerDashboard = () => {
                         data-test-id={`action-button-${i}`}
                         fontWeight="700"
                         fontSize="md"
-                        transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+                        transition="all 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
                         _hover={{ 
-                          transform: 'translateY(-2px)',
-                          shadow: 'xl',
+                          transform: 'translateY(-3px) scale(1.02)',
+                          shadow: '0 12px 30px rgba(0, 0, 0, 0.2)',
                         }}
                         bg={action.gradient}
                         color="white"
                         h="40px"
                         borderRadius="xl"
-                        shadow="md"
-                        _active={{ transform: 'translateY(0px)' }}
+                        shadow="0 6px 20px rgba(0, 0, 0, 0.15)"
+                        _active={{ transform: 'translateY(-1px) scale(0.98)' }}
+                        className="btn-glow"
                       >
                         <HStack gap={2}>
                           <span>Go</span>

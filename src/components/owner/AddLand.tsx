@@ -19,8 +19,7 @@ const AddLand = () => {
 
   const [form, setForm] = useState({
     title: '',
-    state: '',
-    district: '',
+    region: '',
     village: '',
     pincode: '',
     area: 1,
@@ -34,7 +33,7 @@ const AddLand = () => {
   });
 
   const handleSubmit = async () => {
-    if (!form.title || !form.state || !form.district || !form.village) {
+    if (!form.title || !form.region || !form.village) {
       toaster.create({
         title: 'Missing Fields',
         description: 'Please fill all required fields',
@@ -50,8 +49,8 @@ const AddLand = () => {
         ownerMobile: user!.mobile,
         title: form.title,
         location: {
-          state: form.state,
-          district: form.district,
+          state: 'Andhra Pradesh',
+          district: form.region,
           village: form.village,
           pincode: form.pincode,
         },
@@ -80,8 +79,11 @@ const AddLand = () => {
     }
   };
 
-  const states = ['Punjab', 'Haryana', 'Gujarat', 'Maharashtra', 'Uttar Pradesh',
-    'Andhra Pradesh', 'Telangana', 'Karnataka', 'Tamil Nadu', 'Rajasthan'];
+  const regions = [
+    'Guntur', 'Krishna', 'Prakasam', 'East Godavari', 'West Godavari',
+    'Visakhapatnam', 'Vizianagaram', 'Srikakulam', 'Nellore', 'Chittoor',
+    'Kadapa', 'Anantapur', 'Kurnool'
+  ];
   const soilTypes = ['loamy', 'clay', 'sandy', 'red', 'black', 'alluvial'];
   const waterSources = ['borewell', 'canal', 'river', 'rainwater', 'mixed'];
 
@@ -147,7 +149,7 @@ const AddLand = () => {
                     Land Title
                   </FieldLabel>
                   <Input
-                    placeholder="e.g. Premium Agricultural Land in Punjab"
+                    placeholder="e.g. Premium Agricultural Land in Guntur"
                     value={form.title}
                     onChange={(e) => setForm({ ...form, title: e.target.value })}
                     data-test-id="title-input"
@@ -200,36 +202,23 @@ const AddLand = () => {
               </Heading>
 
               <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
-                <FieldRoot required data-test-id="state-section">
+                <FieldRoot required data-test-id="region-section">
                   <FieldLabel fontWeight="700" fontSize="sm" color="gray.700" mb={2}>
-                    State
+                    Region (District)
                   </FieldLabel>
                   <NativeSelectRoot>
                     <NativeSelectField
-                      value={form.state}
-                      onChange={(e) => setForm({ ...form, state: e.target.value })}
-                      placeholder="Select State"
-                      data-test-id="state-select"
+                      value={form.region}
+                      onChange={(e) => setForm({ ...form, region: e.target.value })}
+                      placeholder="Select Region"
+                      data-test-id="region-select"
                       {...inputStyles}
                     >
-                      {states.map((s) => (
-                        <option key={s} value={s}>{s}</option>
+                      {regions.map((r) => (
+                        <option key={r} value={r}>{r}</option>
                       ))}
                     </NativeSelectField>
                   </NativeSelectRoot>
-                </FieldRoot>
-
-                <FieldRoot required data-test-id="district-section">
-                  <FieldLabel fontWeight="700" fontSize="sm" color="gray.700" mb={2}>
-                    District
-                  </FieldLabel>
-                  <Input
-                    placeholder="e.g. Ludhiana"
-                    value={form.district}
-                    onChange={(e) => setForm({ ...form, district: e.target.value })}
-                    data-test-id="district-input"
-                    {...inputStyles}
-                  />
                 </FieldRoot>
 
                 <FieldRoot required data-test-id="village-section">
@@ -237,7 +226,7 @@ const AddLand = () => {
                     Village/Town
                   </FieldLabel>
                   <Input
-                    placeholder="e.g. Khanna"
+                    placeholder="e.g. Mangalagiri"
                     value={form.village}
                     onChange={(e) => setForm({ ...form, village: e.target.value })}
                     data-test-id="village-input"
@@ -250,7 +239,7 @@ const AddLand = () => {
                     Pincode
                   </FieldLabel>
                   <Input
-                    placeholder="e.g. 141401"
+                    placeholder="e.g. 522503"
                     value={form.pincode}
                     onChange={(e) => setForm({ ...form, pincode: e.target.value })}
                     data-test-id="pincode-input"

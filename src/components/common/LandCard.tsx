@@ -22,21 +22,21 @@ const LandCard = ({ land, onView, showOwner = true }: LandCardProps) => {
   return (
     <Box
       bg="white"
-      borderRadius="xl"
+      borderRadius="2xl"
       overflow="hidden"
-      shadow="md"
-      transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+      shadow="0 8px 25px rgba(0, 0, 0, 0.08)"
+      transition="all 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
       _hover={{ 
-        shadow: 'xl', 
-        transform: 'translateY(-8px)',
+        shadow: '0 20px 50px rgba(0, 0, 0, 0.15)', 
+        transform: 'translateY(-10px) scale(1.02)',
       }}
       cursor="pointer"
       onClick={() => onView(land.id)}
       data-test-id="land-card"
       position="relative"
       border="1px solid"
-      borderColor="gray.100"
-      className="fade-in"
+      borderColor="gray.200"
+      className="fade-in card-hover"
     >
       {/* Image Container */}
       <Box position="relative" h="200px" overflow="hidden">
@@ -161,11 +161,17 @@ const LandCard = ({ land, onView, showOwner = true }: LandCardProps) => {
           size="md"
           onClick={(e) => { e.stopPropagation(); onView(land.id); }}
           data-test-id="view-details-button"
-          fontWeight="600"
-          transition="all 0.3s"
-          _hover={{ transform: 'translateY(-2px)', boxShadow: 'md' }}
+          fontWeight="700"
+          transition="all 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
+          _hover={{ 
+            transform: 'translateY(-3px) scale(1.02)', 
+            shadow: '0 10px 25px rgba(13, 161, 13, 0.3)'
+          }}
           bg="linear-gradient(135deg, #0da10d 0%, #25d366 100%)"
           color="white"
+          shadow="0 4px 15px rgba(13, 161, 13, 0.2)"
+          borderRadius="xl"
+          className="btn-glow"
         >
           <HStack gap={2}>
             <FiEye />

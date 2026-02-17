@@ -3,16 +3,27 @@ import {
   StatRoot, StatLabel, StatValueText, Button,
   VStack, HStack, Badge, Icon, SimpleGrid, CardRoot, CardBody,
 } from '@chakra-ui/react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { FiSearch, FiFileText, FiCheckCircle, FiClock, FiArrowRight } from 'react-icons/fi';
-import { selectRequests, selectLands, selectAuth } from '../../store/store';
+import { selectRequests, selectLands, selectAuth, type AppDispatch } from '../../store/store';
+import { fetchLandsThunk } from '../../store/thunks/landsThunk';
+import { fetchRequestsThunk } from '../../store/thunks/requestThunk';
 
 const SeekerDashboard = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
   const { user } = useSelector(selectAuth);
   const requestsState = useSelector(selectRequests);
   const landsState = useSelector(selectLands);
+
+  useEffect(() => {
+    dispatch(fetchLandsThunk());
+    if (user?.id) {
+      dispatch(fetchRequestsThunk());
+    }
+  }, [dispatch, user]);
 
   const myRequests = requestsState.requests.filter((r) => r.seekerId === user?.id);
   const pendingRequests = myRequests.filter((r) => r.status === 'pending');
@@ -55,7 +66,13 @@ const SeekerDashboard = () => {
   ];
 
   return (
-    <Box bg="gray.50" minH="calc(100vh - 64px)" py={10} px={{ base: 4, md: 6, lg: 8 }} data-test-id="seeker-dashboard">
+    <Box 
+      bg="linear-gradient(to bottom, #fafafa 0%, #f5f5f5 100%)" 
+      minH="calc(100vh - 64px)" 
+      py={10} 
+      px={{ base: 4, md: 6, lg: 8 }} 
+      data-test-id="seeker-dashboard"
+    >
       <Container maxW="container.xl" mx="auto">
         <VStack align="start" gap={10} maxW="1400px" mx="auto">
           {/* Header */}
@@ -79,20 +96,32 @@ const SeekerDashboard = () => {
             {stats.map((stat, i) => (
               <CardRoot 
                 key={stat.label} 
-                className="fade-in"
+                className="fade-in card-hover"
                 style={{ animationDelay: `${i * 0.1}s` }}
-                transition="all 0.3s"
+                transition="all 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
                 cursor="pointer"
                 onClick={() => navigate(stat.path)}
-                _hover={{ transform: 'translateY(-6px)', shadow: 'xl' }}
+                _hover={{ 
+                  transform: 'translateY(-8px) scale(1.02)',
+                  shadow: '0 20px 40px rgba(0, 0, 0, 0.12)'
+                }}
                 border="1px solid"
                 borderColor="gray.200"
-                borderTop="4px solid"
-                borderTopColor={stat.color}
+                shadow="0 10px 30px rgba(0, 0, 0, 0.08)"
+                bg="white"
+                position="relative"
                 borderRadius="2xl"
-                shadow="lg"
                 overflow="hidden"
               >
+                {/* Gradient accent */}
+                <Box
+                  position="absolute"
+                  top={0}
+                  left={0}
+                  right={0}
+                  h="4px"
+                  bg={stat.bgGradient}
+                />
                 <CardBody p={8}>
                   <StatRoot>
                     <HStack justify="space-between" mb={3}>

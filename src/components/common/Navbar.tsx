@@ -44,15 +44,17 @@ const Navbar = () => {
 
   return (
     <Box
-      bg="white"
+      bg="rgba(255, 255, 255, 0.95)"
       px={4}
-      shadow="md"
+      shadow="0 4px 20px rgba(0, 0, 0, 0.08)"
       position="sticky"
       top={0}
       zIndex={100}
       data-test-id="navbar"
       borderBottom="1px solid"
       borderColor="gray.100"
+      backdropFilter="blur(10px)"
+      className="glass"
     >
       <Flex h={16} alignItems="center" justifyContent="space-between" maxW="container.xl" mx="auto">
         {/* Logo */}
@@ -65,15 +67,25 @@ const Navbar = () => {
           _hover={{ transform: 'scale(1.05)' }}
         >
           <Box
-            p={2}
-            bg="brand.50"
-            borderRadius="lg"
-            transition="all 0.3s"
-            _hover={{ bg: 'brand.100', transform: 'rotate(5deg)' }}
+            p={2.5}
+            bg="linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)"
+            borderRadius="xl"
+            transition="all 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
+            _hover={{ 
+              bg: 'linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%)',
+              transform: 'rotate(5deg) scale(1.1)',
+              shadow: '0 8px 20px rgba(102, 187, 106, 0.3)'
+            }}
+            shadow="sm"
           >
-            <GiWheat size={28} color="#66bb6a" />
+            <GiWheat size={28} color="#2e7d32" />
           </Box>
-          <Text fontSize={{ base: "lg", md: "xl" }} fontWeight="800" color="brand.600">
+          <Text 
+            fontSize={{ base: "lg", md: "xl" }} 
+            fontWeight="900" 
+            className="text-gradient"
+            letterSpacing="-0.5px"
+          >
             AgriLease
           </Text>
         </HStack>

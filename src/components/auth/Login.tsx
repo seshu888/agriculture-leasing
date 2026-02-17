@@ -58,9 +58,16 @@ const Login = () => {
       h="100vh"
       overflow="hidden"
       overflowX="hidden"
-      bg="linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 50%, #a5d6a7 100%)"
-      backgroundSize="200% 200%"
-      animation="gradient 15s ease infinite"
+      bg="linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 30%, #a5d6a7 60%, #81c784 100%)"
+      backgroundSize="400% 400%"
+      css={{
+        '@keyframes gradient': {
+          '0%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+          '100%': { backgroundPosition: '0% 50%' },
+        },
+        animation: 'gradient 20s ease infinite',
+      }}
       display="flex"
       alignItems="center"
       justifyContent="center"
@@ -69,13 +76,6 @@ const Login = () => {
       data-test-id="login-page"
       w="100%"
       maxW="100vw"
-      css={{
-        '@keyframes gradient': {
-          '0%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
-          '100%': { backgroundPosition: '0% 50%' },
-        },
-      }}
     >
       {/* Decorative elements */}
       <Box
@@ -146,21 +146,32 @@ const Login = () => {
 
           {/* Card */}
           <Box
-            bg="white"
+            bg="rgba(255, 255, 255, 0.95)"
             p={{ base: 5, md: 8 }}
-            borderRadius="2xl"
-            shadow="2xl"
+            borderRadius="3xl"
+            shadow="0 20px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.5)"
             w="100%"
             maxW="100%"
             data-test-id="login-form"
             className="fade-in"
-            border="2px solid"
-            borderColor="whiteAlpha.400"
             backdropFilter="blur(20px)"
-            transition="all 0.3s"
-            _hover={{ shadow: '3xl', transform: 'translateY(-2px)' }}
+            transition="all 0.4s cubic-bezier(0.4, 0, 0.2, 1)"
+            _hover={{ 
+              shadow: '0 25px 70px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.6)',
+              transform: 'translateY(-4px) scale(1.01)'
+            }}
             overflow="hidden"
+            position="relative"
           >
+            {/* Decorative gradient overlay */}
+            <Box
+              position="absolute"
+              top={0}
+              left={0}
+              right={0}
+              h="4px"
+              bg="linear-gradient(90deg, #81c784 0%, #66bb6a 50%, #4caf50 100%)"
+            />
             <VStack gap={{ base: 5, md: 6 }} align="stretch">
               <VStack gap={1}>
                 <Heading size={{ base: "md", md: "lg" }} color="gray.800" fontWeight="800" textAlign="center">

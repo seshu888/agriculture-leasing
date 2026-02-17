@@ -135,7 +135,7 @@ const LandDetails = () => {
                     <HStack color="gray.500" fontSize="md">
                       <Icon as={FiMapPin} />
                       <Text>
-                        {land.location.village}, {land.location.district}, {land.location.state} {land.location.pincode}
+                        {land.location.village}, {land.location.district}, Andhra Pradesh {land.location.pincode}
                       </Text>
                     </HStack>
                   </VStack>
