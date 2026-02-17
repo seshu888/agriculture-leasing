@@ -159,7 +159,7 @@ const Login = () => {
 
               {/* Role Selection - Fixed Clickability and Removed Borders */}
               <FieldRoot data-test-id="role-selection">
-                <FieldLabel fontWeight="700" mb={3} fontSize="sm" color="gray.700">
+                <FieldLabel fontWeight="700" mb={3} fontSize={{ base: "xs", md: "sm" }} color="gray.700">
                   I am a
                 </FieldLabel>
                 <RadioGroupRoot
@@ -170,19 +170,26 @@ const Login = () => {
                     }
                   }}
                 >
-                  <HStack gap={3} justify="center">
+                  <HStack 
+                    gap={{ base: 2, md: 3 }} 
+                    justify="center"
+                    flexWrap={{ base: "wrap", sm: "nowrap" }}
+                    w="100%"
+                  >
                     <Box
                       as="label"
                       cursor="pointer"
                       onClick={() => setRole('seeker')}
-                      w="auto"
+                      flex={{ base: "1 1 calc(50% - 4px)", sm: "0 0 auto" }}
+                      minW={{ base: "calc(50% - 4px)", sm: "auto" }}
+                      maxW={{ base: "calc(50% - 4px)", sm: "none" }}
                     >
                       <RadioGroupItem 
                         value="seeker" 
                         colorPalette="brand" 
                         data-test-id="role-seeker"
-                        p={3}
-                        px={5}
+                        p={{ base: 2.5, md: 3 }}
+                        px={{ base: 3, md: 5 }}
                         borderRadius="lg"
                         border="none"
                         bg={role === 'seeker' ? 'brand.50' : 'gray.50'}
@@ -190,9 +197,11 @@ const Login = () => {
                         _hover={{ bg: 'brand.100' }}
                         whiteSpace="nowrap"
                         shadow={role === 'seeker' ? 'sm' : 'none'}
+                        w="100%"
+                        justifyContent="center"
                       >
                         <RadioGroupItemControl />
-                        <RadioGroupItemText fontWeight="600" fontSize="sm">
+                        <RadioGroupItemText fontWeight="600" fontSize={{ base: "xs", md: "sm" }}>
                           Lease Seeker
                         </RadioGroupItemText>
                       </RadioGroupItem>
@@ -201,14 +210,16 @@ const Login = () => {
                       as="label"
                       cursor="pointer"
                       onClick={() => setRole('owner')}
-                      w="auto"
+                      flex={{ base: "1 1 calc(50% - 4px)", sm: "0 0 auto" }}
+                      minW={{ base: "calc(50% - 4px)", sm: "auto" }}
+                      maxW={{ base: "calc(50% - 4px)", sm: "none" }}
                     >
                       <RadioGroupItem 
                         value="owner" 
                         colorPalette="brand" 
                         data-test-id="role-owner"
-                        p={3}
-                        px={5}
+                        p={{ base: 2.5, md: 3 }}
+                        px={{ base: 3, md: 5 }}
                         borderRadius="lg"
                         border="none"
                         bg={role === 'owner' ? 'brand.50' : 'gray.50'}
@@ -216,9 +227,11 @@ const Login = () => {
                         _hover={{ bg: 'brand.100' }}
                         whiteSpace="nowrap"
                         shadow={role === 'owner' ? 'sm' : 'none'}
+                        w="100%"
+                        justifyContent="center"
                       >
                         <RadioGroupItemControl />
-                        <RadioGroupItemText fontWeight="600" fontSize="sm">
+                        <RadioGroupItemText fontWeight="600" fontSize={{ base: "xs", md: "sm" }}>
                           Land Owner
                         </RadioGroupItemText>
                       </RadioGroupItem>
