@@ -26,6 +26,7 @@ const SeekerDashboard = () => {
       icon: FiSearch, 
       color: 'green.500',
       bgGradient: 'linear-gradient(135deg, #4caf5015 0%, #8bc34a15 100%)',
+      path: '/seeker/browse',
     },
     { 
       label: 'My Requests', 
@@ -33,6 +34,7 @@ const SeekerDashboard = () => {
       icon: FiFileText, 
       color: 'blue.500',
       bgGradient: 'linear-gradient(135deg, #2196f315 0%, #64b5f615 100%)',
+      path: '/seeker/my-requests',
     },
     { 
       label: 'Pending', 
@@ -40,6 +42,7 @@ const SeekerDashboard = () => {
       icon: FiClock, 
       color: 'orange.500',
       bgGradient: 'linear-gradient(135deg, #ff980015 0%, #ff6b3515 100%)',
+      path: '/seeker/my-requests',
     },
     { 
       label: 'Approved', 
@@ -47,6 +50,7 @@ const SeekerDashboard = () => {
       icon: FiCheckCircle, 
       color: 'teal.500',
       bgGradient: 'linear-gradient(135deg, #00968815 0%, #4db6ac15 100%)',
+      path: '/seeker/my-requests',
     },
   ];
 
@@ -78,6 +82,8 @@ const SeekerDashboard = () => {
                 className="fade-in"
                 style={{ animationDelay: `${i * 0.1}s` }}
                 transition="all 0.3s"
+                cursor="pointer"
+                onClick={() => navigate(stat.path)}
                 _hover={{ transform: 'translateY(-6px)', shadow: 'xl' }}
                 border="1px solid"
                 borderColor="gray.200"
@@ -212,6 +218,8 @@ const SeekerDashboard = () => {
                           p={4} 
                           bg="gray.50" 
                           borderRadius="lg"
+                          cursor="pointer"
+                          onClick={() => navigate('/seeker/my-requests')}
                           transition="all 0.2s"
                           _hover={{ bg: 'gray.100', transform: 'translateX(4px)' }}
                         >

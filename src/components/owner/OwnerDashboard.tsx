@@ -36,6 +36,7 @@ const OwnerDashboard = () => {
       icon: FiMapPin, 
       color: 'brand',
       bgGradient: 'linear-gradient(135deg, #81c78415 0%, #a5d6a715 100%)',
+      path: '/owner/my-lands',
     },
     { 
       label: 'Pending Requests', 
@@ -44,6 +45,7 @@ const OwnerDashboard = () => {
       icon: FiInbox, 
       color: 'orange',
       bgGradient: 'linear-gradient(135deg, #ff980015 0%, #ff6b3515 100%)',
+      path: '/owner/requests',
     },
     { 
       label: 'Potential Revenue', 
@@ -52,6 +54,7 @@ const OwnerDashboard = () => {
       icon: FiTrendingUp, 
       color: 'green',
       bgGradient: 'linear-gradient(135deg, #4caf5015 0%, #8bc34a15 100%)',
+      path: '/owner/my-lands',
     },
   ];
 
@@ -112,6 +115,8 @@ const OwnerDashboard = () => {
                 className="fade-in"
                 style={{ animationDelay: `${i * 0.1}s` }}
                 transition="all 0.3s"
+                cursor="pointer"
+                onClick={() => navigate(stat.path)}
                 _hover={{ transform: 'translateY(-6px)', shadow: 'xl' }}
                 border="1px solid"
                 borderColor="gray.200"
