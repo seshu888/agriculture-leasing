@@ -4,7 +4,7 @@ import type { User, Land, LeaseRequest, Message } from '../store/types';
 export const dummyUsers: User[] = [
   {
     id: 'user_1',
-    name: 'Rajesh Kumar',
+    name: 'seshu owner',
     mobile: '+91-9876543210',
     aadhar: '1234-5678-9012',
     role: 'owner',
@@ -13,7 +13,7 @@ export const dummyUsers: User[] = [
   },
   {
     id: 'user_2',
-    name: 'Priya Sharma',
+    name: 'seshu leaser',
     mobile: '+91-9876543211',
     aadhar: '2345-6789-0123',
     role: 'seeker',
@@ -45,7 +45,7 @@ export const dummyLands: Land[] = [
   {
     id: 'land_1',
     ownerId: 'user_1',
-    ownerName: 'Rajesh Kumar',
+    ownerName: 'seshu owner',
     ownerMobile: '+91-9876543210',
     title: 'Premium Agricultural Land in Punjab',
     location: {
@@ -74,7 +74,7 @@ export const dummyLands: Land[] = [
   {
     id: 'land_2',
     ownerId: 'user_1',
-    ownerName: 'Rajesh Kumar',
+    ownerName: 'seshu owner',
     ownerMobile: '+91-9876543210',
     title: 'Organic Farming Land in Haryana',
     location: {
@@ -166,10 +166,10 @@ export const dummyRequests: LeaseRequest[] = [
     id: 'req_1',
     landId: 'land_1',
     seekerId: 'user_2',
-    seekerName: 'Priya Sharma',
+    seekerName: 'seshu leaser',
     seekerMobile: '+91-9876543211',
     ownerId: 'user_1',
-    ownerName: 'Rajesh Kumar',
+    ownerName: 'seshu owner',
     ownerMobile: '+91-9876543210',
     leasePeriod: 12,
     proposedPrice: 9500,
@@ -183,7 +183,7 @@ export const dummyRequests: LeaseRequest[] = [
     id: 'req_2',
     landId: 'land_3',
     seekerId: 'user_2',
-    seekerName: 'Priya Sharma',
+    seekerName: 'seshu leaser',
     seekerMobile: '+91-9876543211',
     ownerId: 'user_3',
     ownerName: 'Amit Patel',
@@ -202,7 +202,7 @@ export const dummyRequests: LeaseRequest[] = [
     seekerName: 'Sunita Verma',
     seekerMobile: '+91-9876543213',
     ownerId: 'user_1',
-    ownerName: 'Rajesh Kumar',
+    ownerName: 'seshu owner',
     ownerMobile: '+91-9876543210',
     leasePeriod: 18,
     proposedPrice: 6800,
