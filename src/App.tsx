@@ -11,7 +11,7 @@ import OTPVerification from './components/auth/OTPVerification';
 import AadharVerification from './components/auth/AadharVerification';
 
 // Common Components
-import Navbar from './components/common/Navbar';
+import DashboardLayout from './components/common/DashboardLayout';
 import ProtectedRoute from './components/common/ProtectedRoute';
 
 // Owner Components
@@ -36,41 +36,39 @@ function App() {
 
   return (
     <Box minH="100vh" bg="gray.50">
-      {isAuthenticated && <Navbar />}
-
       <Routes>
         {/* ── Public Routes ────────────────────── */}
         <Route path="/login" element={<Login />} />
         <Route path="/verify-otp" element={<OTPVerification />} />
         <Route path="/verify-aadhar" element={<AadharVerification />} />
 
-        {/* ── Owner Routes ─────────────────────── */}
-        <Route path="/owner/dashboard" element={
-          <ProtectedRoute role="owner"><OwnerDashboard /></ProtectedRoute>
-        } />
-        <Route path="/owner/add-land" element={
-          <ProtectedRoute role="owner"><AddLand /></ProtectedRoute>
-        } />
-        <Route path="/owner/my-lands" element={
-          <ProtectedRoute role="owner"><MyLands /></ProtectedRoute>
-        } />
-        <Route path="/owner/requests" element={
-          <ProtectedRoute role="owner"><LeaseRequests /></ProtectedRoute>
-        } />
-
-        {/* ── Seeker Routes ────────────────────── */}
-        <Route path="/seeker/dashboard" element={
-          <ProtectedRoute role="seeker"><SeekerDashboard /></ProtectedRoute>
-        } />
-        <Route path="/seeker/browse" element={
-          <ProtectedRoute role="seeker"><BrowseLands /></ProtectedRoute>
-        } />
-        <Route path="/seeker/land/:id" element={
-          <ProtectedRoute role="seeker"><LandDetails /></ProtectedRoute>
-        } />
-        <Route path="/seeker/my-requests" element={
-          <ProtectedRoute role="seeker"><MyRequests /></ProtectedRoute>
-        } />
+        {/* ── Dashboard (Sidebar) Layout ───────── */}
+        <Route element={<DashboardLayout />}>
+          <Route path="/owner/dashboard" element={
+            <ProtectedRoute role="owner"><OwnerDashboard /></ProtectedRoute>
+          } />
+          <Route path="/owner/add-land" element={
+            <ProtectedRoute role="owner"><AddLand /></ProtectedRoute>
+          } />
+          <Route path="/owner/my-lands" element={
+            <ProtectedRoute role="owner"><MyLands /></ProtectedRoute>
+          } />
+          <Route path="/owner/requests" element={
+            <ProtectedRoute role="owner"><LeaseRequests /></ProtectedRoute>
+          } />
+          <Route path="/seeker/dashboard" element={
+            <ProtectedRoute role="seeker"><SeekerDashboard /></ProtectedRoute>
+          } />
+          <Route path="/seeker/browse" element={
+            <ProtectedRoute role="seeker"><BrowseLands /></ProtectedRoute>
+          } />
+          <Route path="/seeker/land/:id" element={
+            <ProtectedRoute role="seeker"><LandDetails /></ProtectedRoute>
+          } />
+          <Route path="/seeker/my-requests" element={
+            <ProtectedRoute role="seeker"><MyRequests /></ProtectedRoute>
+          } />
+        </Route>
 
         {/* ── Default Redirect ─────────────────── */}
         <Route path="/" element={

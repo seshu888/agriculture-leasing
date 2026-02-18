@@ -142,9 +142,7 @@ const LandDetails = () => {
                       </HStack>
                       {land.latitude != null && land.longitude != null && (
                         <Button
-                          size="sm"
-                          variant="outline"
-                          colorScheme="brand"
+                          size="md"
                           onClick={() =>
                             window.open(
                               `https://www.google.com/maps/dir/?api=1&destination=${land.latitude},${land.longitude}`,
@@ -153,12 +151,23 @@ const LandDetails = () => {
                             )
                           }
                           data-test-id="directions-button"
-                          fontWeight="600"
-                          borderRadius="lg"
-                          _hover={{ bg: 'brand.50' }}
+                          fontWeight="700"
+                          h="40px"
+                          px={5}
+                          borderRadius="xl"
+                          bg="linear-gradient(135deg, #0da10d 0%, #25d366 100%)"
+                          color="white"
+                          shadow="0 4px 12px rgba(13, 161, 13, 0.25)"
+                          transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+                          _hover={{
+                            transform: 'translateY(-2px)',
+                            shadow: '0 6px 20px rgba(13, 161, 13, 0.35)',
+                            bg: 'linear-gradient(135deg, #0ea10e 0%, #2dd467 100%)',
+                          }}
+                          _active={{ transform: 'translateY(0)' }}
                         >
                           <HStack gap={2}>
-                            <FiNavigation size={14} />
+                            <FiNavigation size={18} />
                             <span>Get Directions</span>
                           </HStack>
                         </Button>
@@ -171,9 +180,7 @@ const LandDetails = () => {
                       <HStack justify="space-between" align="center" mb={2} px={4} pt={4}>
                         <Heading size="sm" color="gray.700">Location</Heading>
                         <Button
-                          size="xs"
-                          variant="ghost"
-                          colorScheme="brand"
+                          size="sm"
                           onClick={() =>
                             window.open(
                               `https://www.google.com/maps/dir/?api=1&destination=${land.latitude},${land.longitude}`,
@@ -181,10 +188,22 @@ const LandDetails = () => {
                               'noopener,noreferrer'
                             )
                           }
-                          fontWeight="600"
+                          fontWeight="700"
+                          h="36px"
+                          px={4}
+                          borderRadius="lg"
+                          bg="linear-gradient(135deg, #0da10d 0%, #25d366 100%)"
+                          color="white"
+                          shadow="0 2px 8px rgba(13, 161, 13, 0.25)"
+                          transition="all 0.3s"
+                          _hover={{
+                            transform: 'translateY(-1px)',
+                            shadow: '0 4px 12px rgba(13, 161, 13, 0.35)',
+                            bg: 'linear-gradient(135deg, #0ea10e 0%, #2dd467 100%)',
+                          }}
                         >
-                          <HStack gap={1}>
-                            <FiNavigation size={12} />
+                          <HStack gap={2}>
+                            <FiNavigation size={14} />
                             <span>Directions</span>
                           </HStack>
                         </Button>

@@ -106,9 +106,7 @@ const LandCard = ({ land, onView, showOwner = true }: LandCardProps) => {
             </HStack>
             {land.latitude != null && land.longitude != null && (
               <Button
-                size="xs"
-                variant="outline"
-                colorScheme="brand"
+                size="sm"
                 onClick={(e) => {
                   e.stopPropagation();
                   window.open(
@@ -118,12 +116,24 @@ const LandCard = ({ land, onView, showOwner = true }: LandCardProps) => {
                   );
                 }}
                 data-test-id="directions-button"
-                fontWeight="600"
-                borderRadius="lg"
-                _hover={{ bg: 'brand.50' }}
+                fontWeight="700"
+                fontSize="xs"
+                h="32px"
+                px={3}
+                borderRadius="full"
+                bg="linear-gradient(135deg, #0da10d 0%, #25d366 100%)"
+                color="white"
+                shadow="0 2px 8px rgba(13, 161, 13, 0.25)"
+                transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+                _hover={{
+                  transform: 'translateY(-1px)',
+                  shadow: '0 4px 12px rgba(13, 161, 13, 0.35)',
+                  bg: 'linear-gradient(135deg, #0ea10e 0%, #2dd467 100%)',
+                }}
+                _active={{ transform: 'translateY(0)' }}
               >
-                <HStack gap={1}>
-                  <FiNavigation size={12} />
+                <HStack gap={2}>
+                  <FiNavigation size={14} />
                   <span>Directions</span>
                 </HStack>
               </Button>
