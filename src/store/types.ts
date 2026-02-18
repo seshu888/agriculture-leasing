@@ -31,6 +31,10 @@ export interface Land {
     village: string;
     pincode: string;
   };
+  /** Latitude for map display (optional, e.g. from Leaflet) */
+  latitude?: number;
+  /** Longitude for map display (optional) */
+  longitude?: number;
   area: number;
   soilType: 'loamy' | 'clay' | 'sandy' | 'red' | 'black' | 'alluvial';
   waterSource: 'borewell' | 'canal' | 'river' | 'rainwater' | 'mixed';

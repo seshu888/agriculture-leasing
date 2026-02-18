@@ -12,6 +12,7 @@ import { FiSearch, FiX, FiChevronDown, FiCheck } from 'react-icons/fi';
 import { selectLands, type AppDispatch } from '../../store/store';
 import { fetchLandsThunk } from '../../store/thunks/landsThunk';
 import LandCard from '../common/LandCard';
+import MultipleLocationsMap from '../common/MultipleLocationsMap';
 import type { Land } from '../../store/types';
 
 const BrowseLands = () => {
@@ -350,6 +351,42 @@ const BrowseLands = () => {
               </VStack>
             </CardBody>
           </CardRoot>
+
+          {/* Map of all filtered lands */}
+          {!loading && filteredLands.length > 0 && (() => {
+            const withCoords = filteredLands.filter(
+              (l: Land) => l.latitude != null && l.longitude != null
+            );
+            if (withCoords.length === 0) return null;
+            return (
+              <CardRoot
+                w="100%"
+                className="fade-in"
+                border="1px solid"
+                borderColor="gray.200"
+                shadow="0 8px 25px rgba(0, 0, 0, 0.08)"
+                bg="white"
+                borderRadius="2xl"
+                overflow="hidden"
+              >
+                <Box p={4} pb={2}>
+                  <Heading size="sm" color="gray.700" mb={2}>📍 All listings on map</Heading>
+                </Box>
+                <Box px={4} pb={4}>
+                  <MultipleLocationsMap
+                    locations={withCoords.map((l: Land) => ({
+                      id: l.id,
+                      latitude: l.latitude!,
+                      longitude: l.longitude!,
+                      title: l.title,
+                      price: l.pricePerAcre,
+                    }))}
+                    height="360px"
+                  />
+                </Box>
+              </CardRoot>
+            );
+          })()}
 
           {/* Loading */}
           {loading && (

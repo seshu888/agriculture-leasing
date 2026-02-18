@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { store } from './store/store';
 import App from './App';
 import { toaster } from './utils/toast';
+import 'leaflet/dist/leaflet.css';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

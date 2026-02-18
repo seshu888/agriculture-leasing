@@ -6,12 +6,13 @@ import {
 } from '@chakra-ui/react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { FiArrowLeft, FiMapPin, FiDroplet, FiSend, FiCalendar, FiDollarSign } from 'react-icons/fi';
+import { FiArrowLeft, FiMapPin, FiDroplet, FiSend, FiCalendar, FiDollarSign, FiNavigation } from 'react-icons/fi';
 import { GiFarmer } from 'react-icons/gi';
 import { useState } from 'react';
 import { selectLands, selectAuth, type AppDispatch } from '../../store/store';
 import { createRequestThunk } from '../../store/thunks/requestThunk';
 import { toaster } from '../../utils/toast';
+import MapView from '../common/MapView';
 
 const LandDetails = () => {
   const { id } = useParams();
@@ -132,13 +133,71 @@ const LandDetails = () => {
                     <Heading size="xl" fontWeight="800" color="gray.800">
                       {land.title}
                     </Heading>
-                    <HStack color="gray.500" fontSize="md">
-                      <Icon as={FiMapPin} />
-                      <Text>
-                        {land.location.village}, {land.location.district}, Andhra Pradesh {land.location.pincode}
-                      </Text>
+                    <HStack color="gray.500" fontSize="md" flexWrap="wrap" gap={2}>
+                      <HStack>
+                        <Icon as={FiMapPin} />
+                        <Text>
+                          {land.location.village}, {land.location.district}, Andhra Pradesh {land.location.pincode}
+                        </Text>
+                      </HStack>
+                      {land.latitude != null && land.longitude != null && (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          colorScheme="brand"
+                          onClick={() =>
+                            window.open(
+                              `https://www.google.com/maps/dir/?api=1&destination=${land.latitude},${land.longitude}`,
+                              '_blank',
+                              'noopener,noreferrer'
+                            )
+                          }
+                          data-test-id="directions-button"
+                          fontWeight="600"
+                          borderRadius="lg"
+                          _hover={{ bg: 'brand.50' }}
+                        >
+                          <HStack gap={2}>
+                            <FiNavigation size={14} />
+                            <span>Get Directions</span>
+                          </HStack>
+                        </Button>
+                      )}
                     </HStack>
                   </VStack>
+
+                  {land.latitude != null && land.longitude != null && (
+                    <Box borderRadius="xl" overflow="hidden" border="1px solid" borderColor="gray.200" shadow="sm">
+                      <HStack justify="space-between" align="center" mb={2} px={4} pt={4}>
+                        <Heading size="sm" color="gray.700">Location</Heading>
+                        <Button
+                          size="xs"
+                          variant="ghost"
+                          colorScheme="brand"
+                          onClick={() =>
+                            window.open(
+                              `https://www.google.com/maps/dir/?api=1&destination=${land.latitude},${land.longitude}`,
+                              '_blank',
+                              'noopener,noreferrer'
+                            )
+                          }
+                          fontWeight="600"
+                        >
+                          <HStack gap={1}>
+                            <FiNavigation size={12} />
+                            <span>Directions</span>
+                          </HStack>
+                        </Button>
+                      </HStack>
+                      <MapView
+                        latitude={land.latitude}
+                        longitude={land.longitude}
+                        title={land.title}
+                        height="280px"
+                        zoom={13}
+                      />
+                    </Box>
+                  )}
 
                   <Separator />
 

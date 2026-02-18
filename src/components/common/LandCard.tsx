@@ -3,7 +3,7 @@ import {
   Box, Image, Text, Badge, HStack,
   VStack, Button, Icon,
 } from '@chakra-ui/react';
-import { FiMapPin, FiDroplet, FiTrendingUp, FiEye } from 'react-icons/fi';
+import { FiMapPin, FiDroplet, FiTrendingUp, FiEye, FiNavigation } from 'react-icons/fi';
 import { GiFarmer } from 'react-icons/gi';
 import type { Land } from '../../store/types';
 
@@ -97,11 +97,37 @@ const LandCard = ({ land, onView, showOwner = true }: LandCardProps) => {
           >
             {land.title}
           </Text>
-          <HStack color="gray.500" fontSize="sm" data-test-id="land-location">
-            <Icon as={FiMapPin} />
-            <Text css={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-              {land.location.village}, {land.location.district}
-            </Text>
+          <HStack color="gray.500" fontSize="sm" data-test-id="land-location" gap={2} flexWrap="wrap">
+            <HStack flex={1} minW={0}>
+              <Icon as={FiMapPin} flexShrink={0} />
+              <Text css={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                {land.location.village}, {land.location.district}
+              </Text>
+            </HStack>
+            {land.latitude != null && land.longitude != null && (
+              <Button
+                size="xs"
+                variant="outline"
+                colorScheme="brand"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open(
+                    `https://www.google.com/maps/dir/?api=1&destination=${land.latitude},${land.longitude}`,
+                    '_blank',
+                    'noopener,noreferrer'
+                  );
+                }}
+                data-test-id="directions-button"
+                fontWeight="600"
+                borderRadius="lg"
+                _hover={{ bg: 'brand.50' }}
+              >
+                <HStack gap={1}>
+                  <FiNavigation size={12} />
+                  <span>Directions</span>
+                </HStack>
+              </Button>
+            )}
           </HStack>
         </VStack>
 

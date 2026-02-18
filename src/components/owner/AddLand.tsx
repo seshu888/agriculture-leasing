@@ -11,6 +11,7 @@ import { FiSave } from 'react-icons/fi';
 import { selectAuth, type AppDispatch } from '../../store/store';
 import { addLandThunk } from '../../store/thunks/landsThunk';
 import { toaster } from '../../utils/toast';
+import MapView from '../common/MapView';
 
 const AddLand = () => {
   const navigate = useNavigate();
@@ -22,6 +23,8 @@ const AddLand = () => {
     region: '',
     village: '',
     pincode: '',
+    latitude: 16.3067 as number | '',
+    longitude: 80.4365 as number | '',
     area: 1,
     soilType: 'loamy' as const,
     waterSource: 'borewell' as const,
@@ -66,6 +69,9 @@ const AddLand = () => {
         images: ['https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800'],
         available: true,
         facilities: [],
+        ...(typeof form.latitude === 'number' && typeof form.longitude === 'number'
+          ? { latitude: form.latitude, longitude: form.longitude }
+          : {}),
       })
     );
 
@@ -247,6 +253,56 @@ const AddLand = () => {
                   />
                 </FieldRoot>
               </SimpleGrid>
+
+              {/* Map – optional coordinates for listing on map */}
+              <Box mt={6}>
+                <FieldLabel fontWeight="700" fontSize="sm" color="gray.700" mb={2}>
+                  Location on map (optional)
+                </FieldLabel>
+                <Text fontSize="sm" color="gray.500" mb={3}>
+                  Set latitude/longitude so your land appears on the map. Default is Guntur.
+                </Text>
+                <Box borderRadius="xl" overflow="hidden" border="1px solid" borderColor="gray.200" mb={4}>
+                  <MapView
+                    key={`${form.latitude}-${form.longitude}`}
+                    latitude={typeof form.latitude === 'number' ? form.latitude : 16.3067}
+                    longitude={typeof form.longitude === 'number' ? form.longitude : 80.4365}
+                    title={form.title || 'Your land'}
+                    height="260px"
+                    zoom={12}
+                  />
+                </Box>
+                <SimpleGrid columns={{ base: 1, md: 2 }} gap={4}>
+                  <FieldRoot>
+                    <FieldLabel fontSize="xs" color="gray.500">Latitude</FieldLabel>
+                    <Input
+                      type="number"
+                      step="0.0001"
+                      placeholder="16.3067"
+                      value={form.latitude === '' ? '' : form.latitude}
+                      onChange={(e) => {
+                        const v = e.target.value;
+                        setForm({ ...form, latitude: v === '' ? '' : parseFloat(v) || '' });
+                      }}
+                      {...inputStyles}
+                    />
+                  </FieldRoot>
+                  <FieldRoot>
+                    <FieldLabel fontSize="xs" color="gray.500">Longitude</FieldLabel>
+                    <Input
+                      type="number"
+                      step="0.0001"
+                      placeholder="80.4365"
+                      value={form.longitude === '' ? '' : form.longitude}
+                      onChange={(e) => {
+                        const v = e.target.value;
+                        setForm({ ...form, longitude: v === '' ? '' : parseFloat(v) || '' });
+                      }}
+                      {...inputStyles}
+                    />
+                  </FieldRoot>
+                </SimpleGrid>
+              </Box>
             </Box>
 
             {/* Land Details */}
